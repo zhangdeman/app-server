@@ -19,6 +19,8 @@ class Controller extends BaseController
      */
     public function success($data, $isQuit = true)
     {
+        header('Access-Control-Allow-Origin:*');
+
         $returnData = array(
             'error_code'    => 0,
             'error_msg'     =>  'success',
@@ -42,6 +44,7 @@ class Controller extends BaseController
      */
     public function error($errorCode, $errorMsg = '', $errorData = array(), $isQuit = true)
     {
+        header('Access-Control-Allow-Origin:*');
         $errorMsg = empty($errorMsg) ? Out::getErrorMsg($errorCode) : $errorMsg;
         $outData = array(
             'error_code'    =>  $errorCode,

@@ -11,6 +11,18 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/article/getNavList', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\GetNavList();
+    $instance->getNav($request);
+});
+
+Route::get('/article/getArticleList', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\GetArticleList();
+    $instance->getList($request);
 });
