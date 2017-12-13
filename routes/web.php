@@ -26,3 +26,8 @@ Route::get('/article/getArticleList', function (Request $request){
     $instance = new \App\Http\Controllers\Article\GetArticleList();
     $instance->getList($request);
 });
+
+Route::get('/article/getArticleDetail', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\GetArticleDetail();
+    $instance->getDetail($request);
+});

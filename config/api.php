@@ -39,4 +39,15 @@ return [
         'options'           =>  array()
     ),
 
+    //获取文章列表
+    'get_article_detail' => array(
+        'uri'   =>  '/api/article/getArticleDetail',
+        'method'=> 'get',
+        'connect_time_out'  =>  20,
+        'execute_time_out'  =>  30,
+        'retry_times'       =>  2,
+        'header'            =>  array(),
+        'options'           =>  array()
+    ),
+
 ];

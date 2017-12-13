@@ -43,4 +43,14 @@ class ArticleLib extends BaseLibrary
         return $articleList;
     }
 
+    /**
+     * 获取文章详情
+     * @param array $params
+     * @return bool
+     */
+    public static function getArticleDetail(array $params = array())
+    {
+        return self::curl('get_article_detail', $params);
+    }
+
 }
