@@ -26,14 +26,14 @@ class GetArticleList extends Controller
         $articleSonType = $request->input('son_type', null);
         $where = array();
         if (!is_null($articleParentType)) {
-            $where['parent_type'] = $articleParentType;
+            $where['parent_kind'] = $articleParentType;
         }
 
         if (!is_null($articleSonType)) {
-            $where['son_type'] = $articleSonType;
+            $where['son_kind'] = $articleSonType;
         }
 
-        $where['page_size'] = $request->input('page_size', 20);
+        $where['page_size'] = $request->input('page_size', 1);
         $where['current_page'] = $request->input('current_page', 1);
         $where['order_field'] = 'create_time';
         $where['order_rule'] = 'desc';
