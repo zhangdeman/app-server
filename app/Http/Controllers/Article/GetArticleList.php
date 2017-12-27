@@ -33,7 +33,7 @@ class GetArticleList extends Controller
             $where['son_kind'] = $articleSonType;
         }
 
-        $where['page_size'] = $request->input('page_size', 1);
+        $where['page_size'] = $request->input('page_size', 5);
         $where['current_page'] = $request->input('current_page', 1);
         $where['order_field'] = 'create_time';
         $where['order_rule'] = 'desc';
