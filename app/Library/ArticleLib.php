@@ -18,9 +18,11 @@ class ArticleLib extends BaseLibrary
      * 获取文章类别
      * @return bool
      */
-    public static function getArticleKind()
+    public static function getArticleKind($params)
     {
-        return self::curl('get_article_kind');
+        $list = self::curl('get_article_kind', $params);
+        $list = $list['article_kind_list'];
+        return $list;
     }
 
     /**

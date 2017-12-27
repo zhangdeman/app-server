@@ -18,6 +18,14 @@ class GetNavList extends Controller
 
     public function getNav(Request $request)
     {
-        $this->success(ArticleLib::getArticleKind());
+        $params = array(
+            'parent_id' =>  0,
+            'status'    =>  0,
+            'page_size' =>  20,
+            'current_page'  =>  1,
+            'order_field'   =>  'create_time',
+            'order_rule'    =>  'DESC'
+        );
+        $this->success(ArticleLib::getArticleKind($params));
     }
 }
