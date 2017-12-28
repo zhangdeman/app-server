@@ -31,3 +31,13 @@ Route::get('/article/getArticleDetail', function (Request $request){
     $instance = new \App\Http\Controllers\Article\GetArticleDetail();
     $instance->getDetail($request);
 });
+
+Route::get('/developer/getDevelopInfo', function (Request $request){
+    $instance = new \App\Http\Controllers\Admin\Developer();
+    $instance->getDeveloperInfo($request);
+});
+
+Route::get('/recommend/getList', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\Recommend();
+    $instance->getList($request);
+});
