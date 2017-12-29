@@ -41,3 +41,8 @@ Route::get('/recommend/getList', function (Request $request){
     $instance = new \App\Http\Controllers\Article\Recommend();
     $instance->getList($request);
 });
+
+Route::get('/hotArticle/getList', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\HotArticle();
+    $instance->getList($request);
+});
