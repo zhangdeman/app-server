@@ -48,11 +48,18 @@ class ArticleLib extends BaseLibrary
     /**
      * 获取文章详情
      * @param array $params
-     * @return bool
+     * @return array
      */
     public static function getArticleDetail(array $params = array())
     {
-        return self::curl('get_article_detail', $params);
+        $articleDetail = self::curl('get_article_detail', $params);
+        if (empty($articleDetail)) {
+            return array();
+        }
+
+        $articleDetail['create_time'] = Time::formatTime($articleDetail['create_time']);
+
+        return $articleDetail;
     }
 
 }
