@@ -50,4 +50,15 @@ return [
         'options'           =>  array()
     ),
 
+    //获取管理员列表
+    'get_admin_list' => array(
+        'uri'   =>  '/api/admin/getList',
+        'method'=> 'get',
+        'connect_time_out'  =>  20,
+        'execute_time_out'  =>  30,
+        'retry_times'       =>  2,
+        'header'            =>  array(),
+        'options'           =>  array()
+    ),
+
 ];

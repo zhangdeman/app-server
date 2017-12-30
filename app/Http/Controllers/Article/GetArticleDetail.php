@@ -29,6 +29,8 @@ class GetArticleDetail extends Controller
         );
 
         $articleDetail = ArticleLib::getArticleDetail($where);
+
+
         $this->success($articleDetail);
     }
 }

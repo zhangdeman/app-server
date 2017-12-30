@@ -46,3 +46,8 @@ Route::get('/hotArticle/getList', function (Request $request){
     $instance = new \App\Http\Controllers\Article\HotArticle();
     $instance->getList($request);
 });
+
+Route::get('/author/getAuthorInfo', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\HotArticle();
+    $instance->getList($request);
+});

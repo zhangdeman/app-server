@@ -59,6 +59,24 @@ class ArticleLib extends BaseLibrary
 
         $articleDetail['create_time'] = Time::formatTime($articleDetail['create_time']);
 
+        //类别信息
+        $params = array(
+            'id'    =>  $articleDetail['parent_kind'].','.$articleDetail['son_kind'],
+            'current_page' => 1,
+            'page_limit'    =>  1,
+        );
+        $kindInfo = self::getArticleKind($params);
+        $kindInfo = ArrayTool::toHashMap($kindInfo, 'id');
+        $articleDetail['show_kind'] = $kindInfo[$articleDetail['parent_kind']]['title'].'/'.$kindInfo[$articleDetail['son_kind']]['title'];
+        //作者信息
+        $adminParams = array(
+            'id'    =>  $articleDetail['admin_id'],
+            'current_page' => 1,
+            'page_limit'    =>  1,
+        );
+        $adminInfo = Admin::getAdminInfo($adminParams);
+        $articleDetail['author_name'] = $adminInfo['admin_list'][0]['nickname'];
+
         return $articleDetail;
     }
 
