@@ -112,6 +112,15 @@ class BaseLibrary
 
         $httpCode = $curlInstance->getInfo(CURLINFO_HTTP_CODE);
 
+        $logData = array(
+            'response_data' =>  $requestResult,
+            'http_code' =>  $httpCode,
+            'request_params'    =>  $params,
+            'request_config'    =>  $config
+        );
+        MyLog::info($logData);
+
+
         if (200 == $httpCode && $requestResult) {
             $returnData = json_decode($requestResult, true);
             self::setErrorCode($returnData['error_code']);
