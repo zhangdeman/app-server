@@ -51,3 +51,15 @@ Route::get('/author/getAuthorInfo', function (Request $request){
     $instance = new \App\Http\Controllers\Article\HotArticle();
     $instance->getList($request);
 });
+
+//获取客户端信息
+Route::get('/client/getClientInfo', function (Request $request){
+    $instance = new \App\Http\Controllers\Auth\GetClientInfo();
+    $instance->getInfo($request);
+});
+
+//获取最近文章信息
+Route::get('/article/lastArticle', function (Request $request){
+    $instance = new \App\Http\Controllers\Article\LastArticle();
+    $instance->getList($request);
+});
