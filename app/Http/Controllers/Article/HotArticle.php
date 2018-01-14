@@ -30,25 +30,6 @@ class HotArticle extends Controller
         );
         $articleList = ArticleLib::getArticleList($params);
         $articleList = $articleList['article_list'];
-        $parentKindId = ArrayTool::getFiled($articleList,'parent_kind');
-        $sonKind = ArrayTool::getFiled($articleList, 'son_kind');
-        $kindIds = array_unique(array_merge($parentKindId, $sonKind));
-
-        $kindListParams = array(
-            'current_page'  =>  1,
-            'page_limit'    =>  count($kindIds),
-            'order_field'   =>  'create_time',
-            'order_rule'    =>  'DESC',
-            'id'            =>  implode(',' , $kindIds),
-        );
-
-        $kindInfo = ArticleLib::getArticleKind($kindListParams);
-
-        $kindInfo = ArrayTool::toHashMap($kindInfo, 'id');
-        foreach ($articleList as &$item){
-            $item['show_kind'] = $kindInfo[$item['parent_kind']]['title'].' -- '.$kindInfo[$item['son_kind']]['title'];
-        }
-
         $this->success($articleList);
     }
 }

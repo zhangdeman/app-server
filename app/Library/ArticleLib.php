@@ -6,6 +6,7 @@
  * Time: 23:51
  */
 namespace App\Library;
+use App\Library\Time;
 
 class ArticleLib extends BaseLibrary
 {
@@ -38,8 +39,29 @@ class ArticleLib extends BaseLibrary
         }
 
         foreach ($articleList['article_list'] as &$singleArticle) {
+            //已发布时长
+            $singleArticle['has_publish_time'] = Time::getTimeLong($singleArticle['create_time'], time());
             $singleArticle['create_time'] = date('Y-m-d H:i:s', $singleArticle['create_time']);
             $singleArticle['text_content'] = str_limit($singleArticle['text_content'], 256, '...');
+        }
+
+        $parentKindId = ArrayTool::getFiled($articleList['article_list'],'parent_kind');
+        $sonKind = ArrayTool::getFiled($articleList['article_list'], 'son_kind');
+        $kindIds = array_unique(array_merge($parentKindId, $sonKind));
+
+        $kindListParams = array(
+            'current_page'  =>  1,
+            'page_limit'    =>  count($kindIds),
+            'order_field'   =>  'create_time',
+            'order_rule'    =>  'DESC',
+            'id'            =>  implode(',' , $kindIds),
+        );
+
+        $kindInfo = self::getArticleKind($kindListParams);
+
+        $kindInfo = ArrayTool::toHashMap($kindInfo, 'id');
+        foreach ($articleList['article_list'] as &$item){
+            $item['show_kind'] = $kindInfo[$item['parent_kind']]['title'].'/'.$kindInfo[$item['son_kind']]['title'];
         }
 
         return $articleList;
