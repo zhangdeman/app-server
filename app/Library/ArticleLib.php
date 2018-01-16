@@ -35,7 +35,13 @@ class ArticleLib extends BaseLibrary
     {
         $articleList = self::curl('get_article_list', $params);
         if (empty($articleList)) {
-            return array();
+            return array(
+                'article_list' => array(),
+                'total_page' => 1,
+                'current_page' => 1,
+                'page_limit' => 20,
+                'total_count' => 0
+            );
         }
 
         foreach ($articleList['article_list'] as &$singleArticle) {
