@@ -81,7 +81,7 @@ class ArticleLib extends BaseLibrary
             'id'            =>  implode(',' , $adminIds),
         );
         $adminInfo = Admin::getAdminInfo($adminListParams);
-        $adminInfo = ArrayTool::toHashMap($adminInfo, 'id');
+        $adminInfo = ArrayTool::toHashMap($adminInfo['admin_list'], 'id');
         foreach ($articleList['article_list'] as &$item){
             $item['show_admin_name'] = $adminInfo[$item['admin_id']]['nickname'];
         }
