@@ -72,6 +72,22 @@ class ArticleLib extends BaseLibrary
             $item['show_kind'] = $kindInfo[$item['parent_kind']]['title'].'/'.$kindInfo[$item['son_kind']]['title'];
         }
 
+        //处理发布的管理员姓名
+        $adminIds = array_unique(ArrayTool::getFiled($articleList['article_list'],'admin_id'));
+
+        $adminListParams = array(
+            'current_page'  =>  1,
+            'page_limit'    =>  count($adminIds),
+            'order_field'   =>  'create_time',
+            'order_rule'    =>  'DESC',
+            'id'            =>  implode(',' , $adminIds),
+        );
+        $adminInfo = Admin::getAdminInfo($adminListParams);
+        $adminInfo = ArrayTool::toHashMap($adminInfo['admin_list'], 'id');
+        foreach ($articleList['article_list'] as &$item){
+            $item['show_admin_name'] = $adminInfo[$item['admin_id']]['nickname'];
+        }
+
         return $articleList;
     }
 
