@@ -1,0 +1,3 @@
+[submodule "themis"]
+	path = themis
+	url = https://github.com/zhangdeman/themis.git

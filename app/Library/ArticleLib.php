@@ -7,7 +7,7 @@
  */
 namespace App\Library;
 use App\Library\Time;
-
+use Themis\Article\Article;
 class ArticleLib extends BaseLibrary
 {
     public function __construct()
@@ -49,6 +49,8 @@ class ArticleLib extends BaseLibrary
             $singleArticle['has_publish_time'] = Time::getTimeLong($singleArticle['create_time'], time());
             $singleArticle['create_time'] = date('Y-m-d H:i:s', $singleArticle['create_time']);
             $singleArticle['text_content'] = str_limit($singleArticle['text_content'], 256, '...');
+            //标题
+            $singleArticle['title'] = '【'.Article::getIsOriginalValue($singleArticle['is_original']).'】'.$singleArticle['title'];
         }
 
         $parentKindId = ArrayTool::getFiled($articleList['article_list'],'parent_kind');
@@ -96,6 +98,8 @@ class ArticleLib extends BaseLibrary
         $kindInfo = self::getArticleKind($params);
         $kindInfo = ArrayTool::toHashMap($kindInfo, 'id');
         $articleDetail['show_kind'] = $kindInfo[$articleDetail['parent_kind']]['title'].'/'.$kindInfo[$articleDetail['son_kind']]['title'];
+        $articleDetail['title'] = '【'.Article::getIsOriginalValue($singleArticle['is_original']).'】'.$singleArticle['title'];
+
         //作者信息
         $adminParams = array(
             'id'    =>  $articleDetail['admin_id'],
