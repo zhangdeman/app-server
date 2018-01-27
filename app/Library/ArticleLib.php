@@ -114,7 +114,7 @@ class ArticleLib extends BaseLibrary
         $kindInfo = self::getArticleKind($params);
         $kindInfo = ArrayTool::toHashMap($kindInfo, 'id');
         $articleDetail['show_kind'] = $kindInfo[$articleDetail['parent_kind']]['title'].'/'.$kindInfo[$articleDetail['son_kind']]['title'];
-        $articleDetail['title'] = '【'.Article::getIsOriginalValue($singleArticle['is_original']).'】'.$singleArticle['title'];
+        $articleDetail['title'] = '【'.Article::getIsOriginalValue($articleDetail['is_original']).'】'.$singleArticle['title'];
 
         //作者信息
         $adminParams = array(
